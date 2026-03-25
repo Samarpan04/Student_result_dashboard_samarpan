@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Student Result Dashboard - View student results, analytics, and performance metrics">
+    <title>Student Result Dashboard | Home</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">LOADING DASHBOARD</div>
+    </div>
+
+    <!-- Particle Background -->
+    <div class="particles-bg" id="particlesBg"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">
+            <span class="nav-brand-icon">🎓</span>
+            <span class="nav-brand-text">RESULT DASHBOARD</span>
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html" class="active">Dashboard</a></li>
+            <li><a href="admin.html">Admin Panel</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Section Header -->
+        <div class="section-header fade-in">
+            <h1 class="section-title">📊 Dashboard Overview</h1>
+            <p class="section-subtitle">Real-time student performance metrics and analytics</p>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid" id="statsGrid">
+            <div class="stat-card fade-in">
+                <div class="stat-card-header">
+                    <span class="stat-card-label">Total Students</span>
+                    <div class="stat-card-icon">👥</div>
+                </div>
+                <div class="stat-card-value" id="totalStudents" data-target="0">0</div>
+                <div class="stat-card-desc">Enrolled across all courses</div>
+            </div>
+            <div class="stat-card fade-in">
+                <div class="stat-card-header">
+                    <span class="stat-card-label">Average Marks</span>
+                    <div class="stat-card-icon">📈</div>
+                </div>
+                <div class="stat-card-value" id="averageMarks" data-target="0">0%</div>
+                <div class="stat-card-desc">Overall percentage average</div>
+            </div>
+            <div class="stat-card fade-in">
+                <div class="stat-card-header">
+                    <span class="stat-card-label">Pass Rate</span>
+                    <div class="stat-card-icon">✅</div>
+                </div>
+                <div class="stat-card-value" id="passRate" data-target="0">0%</div>
+                <div class="stat-card-desc">Students scoring above 40%</div>
+            </div>
+            <div class="stat-card fade-in">
+                <div class="stat-card-header">
+                    <span class="stat-card-label">Topper</span>
+                    <div class="stat-card-icon">🏆</div>
+                </div>
+                <div class="stat-card-value" id="topperName" style="font-size:1.1rem">—</div>
+                <div class="stat-card-desc" id="topperCourse">Top performer</div>
+            </div>
+        </div>
+
+        <!-- Search Section -->
+        <div class="search-section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">🔍 Find Students</h2>
+                <p class="section-subtitle">Search by name, roll number or filter by course and semester</p>
+            </div>
+            <div class="search-container">
+                <div class="search-input-wrapper">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search by name or roll number..." autocomplete="off">
+                    <div class="search-suggestions" id="searchSuggestions"></div>
+                </div>
+                <select class="filter-select" id="courseFilter">
+                    <option value="">All Courses</option>
+                </select>
+                <select class="filter-select" id="semesterFilter">
+                    <option value="">All Semesters</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Students Table -->
+        <div class="glass-card students-table-wrapper fade-in" id="studentsTableWrapper">
+            <table class="students-table">
+                <thead>
+                    <tr>
+                        <th>Student</th>
+                        <th>Roll Number</th>
+                        <th>Course</th>
+                        <th>Semester</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody id="studentsTableBody">
+                    <!-- Populated by JS -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Topper Section -->
+        <div class="topper-section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">🏆 Topper Spotlight</h2>
+                <p class="section-subtitle">Highest performing student across all courses</p>
+            </div>
+            <div class="topper-card" id="topperCard">
+                <div class="topper-avatar-wrapper">
+                    <span class="topper-crown">👑</span>
+                    <img class="topper-avatar" id="topperAvatar" src="" alt="Topper">
+                </div>
+                <div class="topper-info">
+                    <div class="topper-badge">⭐ TOP PERFORMER</div>
+                    <div class="topper-name" id="topperFullName">—</div>
+                    <div class="topper-detail" id="topperCourseDetail">—</div>
+                    <div class="topper-detail" id="topperRoll">—</div>
+                    <div class="topper-percentage" id="topperPercentage">—</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notice Board -->
+        <div class="notice-section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">📢 Notice Board</h2>
+                <p class="section-subtitle">Latest announcements and updates</p>
+            </div>
+            <div class="notice-marquee-wrapper">
+                <div class="notice-marquee" id="noticeMarquee">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="fade-in">
+            <div class="section-header">
+                <h2 class="section-title">📈 Analytics Overview</h2>
+                <p class="section-subtitle">Visualize student performance across courses and subjects</p>
+            </div>
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <div class="chart-title">📊 COURSE-WISE AVERAGE PERFORMANCE</div>
+                    <div class="chart-container">
+                        <canvas id="courseChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-title">📉 STUDENT PERFORMANCE COMPARISON</div>
+                    <div class="chart-container">
+                        <canvas id="studentChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

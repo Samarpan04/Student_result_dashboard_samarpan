@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Student Profile - Detailed marks, performance analytics and growth charts">
+    <title>Student Profile | Result Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">LOADING PROFILE</div>
+    </div>
+
+    <!-- Particle Background -->
+    <div class="particles-bg" id="particlesBg"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">
+            <span class="nav-brand-icon">🎓</span>
+            <span class="nav-brand-text">RESULT DASHBOARD</span>
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Dashboard</a></li>
+            <li><a href="admin.html">Admin Panel</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <button class="back-btn" onclick="history.back()">← Back to Dashboard</button>
+
+        <!-- Profile Header -->
+        <div class="glass-card profile-header fade-in" id="profileHeader">
+            <div class="profile-avatar-wrapper">
+                <img class="profile-avatar" id="profileAvatar" src="" alt="Student">
+                <span class="profile-status-badge" id="profileStatus">—</span>
+            </div>
+            <div class="profile-info">
+                <h1 class="profile-name" id="profileName">Loading...</h1>
+                <div class="profile-meta" id="profileMeta">
+                    <span class="profile-meta-item">📚 <span id="profileCourse">—</span></span>
+                    <span class="profile-meta-item">📅 Semester <span id="profileSemester">—</span></span>
+                    <span class="profile-meta-item">🎫 <span id="profileRoll">—</span></span>
+                    <span class="profile-meta-item">📧 <span id="profileEmail">—</span></span>
+                    <span class="profile-meta-item">📱 <span id="profilePhone">—</span></span>
+                </div>
+                <div class="profile-rank-badge" id="profileRank">
+                    🏅 Rank: —
+                </div>
+            </div>
+        </div>
+
+        <!-- Current Semester Marks -->
+        <div class="marks-section fade-in">
+            <div class="section-header">
+                <h2 class="section-title">📝 Current Semester Marks</h2>
+                <p class="section-subtitle">Subject-wise performance with animated progress indicators</p>
+            </div>
+            <div class="marks-grid" id="marksGrid">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+
+        <!-- Growth Analytics Charts -->
+        <div class="fade-in">
+            <div class="section-header">
+                <h2 class="section-title">📈 Growth Analytics</h2>
+                <p class="section-subtitle">Semester-wise performance trends and subject comparisons</p>
+            </div>
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <div class="chart-title">📊 SEMESTER-WISE GROWTH</div>
+                    <div class="chart-container">
+                        <canvas id="growthChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-title">📉 CURRENT SEMESTER SUBJECTS</div>
+                    <div class="chart-container">
+                        <canvas id="subjectChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Performance Prediction -->
+        <div class="glass-card fade-in" style="margin-top: 1.5rem; padding: 2rem;">
+            <div class="section-header" style="margin-bottom: 1rem;">
+                <h2 class="section-title">🤖 AI Performance Prediction</h2>
+                <p class="section-subtitle">Based on current growth trajectory analysis</p>
+            </div>
+            <div id="aiPrediction" style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script src="js/student.js"></script>
+</body>
+</html>
